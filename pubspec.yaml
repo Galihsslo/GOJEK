@@ -59,10 +59,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets\img\gojek.png
-    - assets/icons/icon_menu.png
+    - assets\icons\icon_menu.png
     - assets/icons/icon_saldo.png
     - assets/icons/icon_scan.png
     - assets/icons/icon_transfer.png
+    - assets/img/food_1.jpg
+    - assets/img/food_2.jpg
+    - assets/img/food_3.jpg
+    - assets/img/food_4.jpg
+    - assets/img/food_5.jpg
+    #bisa juga seperti ini
+    #- assets/img  -> item sudah otomatis di panggil
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -80,13 +87,9 @@ flutter:
     - family: NeoSans
       fonts:
         - asset: assets/font/Neo Sans Std Regular.otf
-        - asset: font/Neo Sans Std Bold.otf
-          style: italic
     - family: NeoSansBold
       fonts:
         - asset: assets/font/Neo Sans Std Bold.otf
-        - asset: font/Neo Sans Std Bold.otf
-          weight: 700
 
   #fonts:
   #- family: NeoSans

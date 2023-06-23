@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_galih/constant.dart';
-import 'package:flutter_galih/constant.dart';
 import 'package:flutter_galih/beranda/beranda_view.dart';
+//import 'package:flutter_galih/beranda/beranda.dart';
 
 class LandingPage extends StatefulWidget {
   @override

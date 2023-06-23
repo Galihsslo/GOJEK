@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'launcher/launcher_view.dart'; //mengambil fungsi launcher
-import 'landingpage/landingpage_view.dart';
-import 'launcher/launcher_view.dart';
 import 'constant.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,12 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gojek',
-      theme: new ThemeData(
+      theme: ThemeData(
         fontFamily: 'NeoSans',
         primaryColor: Gojekpalette.green,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: new LauncherPage(),
+      home: LauncherPage(),
     );
   }
 }
