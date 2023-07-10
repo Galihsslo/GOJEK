@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_new, avoid_unnecessary_containers, use_key_in_widget_constructors, library_private_types_in_public_api, prefer_final_fields, unused_field
+
 import 'package:flutter/material.dart';
 import 'package:flutter_galih/beranda/beranda_gojek_appbar.dart';
 import 'package:flutter_galih/beranda/beranda_model.dart';
@@ -55,7 +57,53 @@ class _BerandaPageState extends State<BerandaPage> {
         title: "GO-MART"));
     _gojekServiceList.add(GojekService(
         image: Icons.local_play, color: Gojekpalette.menuTix, title: "GO-TIX"));
-
+//start bottom sheet
+    Widget _buildMenuBottomSheet() {
+      return StatefulBuilder(builder: (c, s) {
+        return SafeArea(
+            child: Container(
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0), color: Colors.white),
+          child: Column(children: <Widget>[
+            Icon(
+              Icons.drag_handle,
+              color: Gojekpalette.green,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "GO-JEK Services",
+                  style: TextStyle(fontFamily: "NeoSansBold", fontSize: 18.0),
+                ),
+                OutlinedButton(
+// color: Gojekpalette.green,
+                  onPressed: () {},
+                  child: Text(
+                    "EDIT FAVORITES",
+                    style: TextStyle(fontSize: 12.0, color: Gojekpalette.green),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 300.0,
+              child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _gojekServiceList.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4),
+                  itemBuilder: (context, position) {
+                    return _rowGojekService(_gojekServiceList[position]);
+                  }),
+            ),
+          ]),
+        ));
+      });
+    }
+//end bottom sheet
     //fitur gofood
 
     Future<List<Food>> fetchFood() async {
@@ -71,20 +119,10 @@ class _BerandaPageState extends State<BerandaPage> {
       _goFoodFeaturedList
           .add(Food(title: "Warteg", image: "assets/img/food_5.jpg"));
 
-      return new Future.delayed(new Duration(seconds: 1), () {
+      return Future.delayed(Duration(seconds: 1), () {
         return _goFoodFeaturedList;
       });
     }
-    // _goFoodFeaturedList.add(
-    //     new Food(title: "Steak Andakar", image: "assets/images/food_1.jpg"));
-    // _goFoodFeaturedList.add(
-    //     new Food(title: "Mie Ayam Tumini", image: "assets/images/food_2.jpg"));
-    // _goFoodFeaturedList.add(
-    //     new Food(title: "Tengkleng Hohah", image: "assets/images/food_3.jpg"));
-    // _goFoodFeaturedList.add(
-    //     new Food(title: "Warung Steak", image: "assets/images/food_4.jpg"));
-    // _goFoodFeaturedList.add(new Food(
-    //     title: "Kindai Warung Banjar", image: "assets/images/food_5.jpg"));
   }
 
   Widget _buildGojekServiceMenu() {
@@ -106,104 +144,46 @@ class _BerandaPageState extends State<BerandaPage> {
     );
   }
 
-// gofood featured
-  // Widget _buildGoFoodFeatured() {
-  //   return Container(
-  //     padding: EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 16.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.stretch,
-  //       children: <Widget>[
-  //         Text(
-  //           "GO-FOOD",
-  //           style: TextStyle(fontFamily: "NeoSansBold"),
-  //         ),
-  //         Padding(
-  //           padding: EdgeInsets.only(top: 8.0),
-  //         ),
-  //         Text(
-  //           "Pilihan Terlaris",
-  //           style: TextStyle(fontFamily: "NeoSansBold"),
-  //         ),
-  //         SizedBox(
-  //           height: 172.0,
-  //           // child: ListView.builder(
-  //           //   itemCount: _goFoodFeaturedList.length,
-  //           //   padding: EdgeInsets.only(top: 12.0),
-  //           //   physics: ClampingScrollPhysics(),
-  //           //   scrollDirection: Axis.horizontal,
-  //           //   itemBuilder: (context, index) {
-  //           //     return _rowGoFoodFeatured(_goFoodFeaturedList[index]);
-
-  //           //   },
-  //           // ),
-  //           child: FutureBuilder<List>(
-  //             future: fetchFood(),
-  //             builder: (context, snapshot) {
-  //               if (snapshot.hasData) {
-  //                 return new ListView.builder(
-  //                   itemCount: snapshot.data!.length,
-  //                   padding: EdgeInsets.only(top: 12.0),
-  //                   physics: new ClampingScrollPhysics(),
-  //                   scrollDirection: Axis.horizontal,
-  //                   itemBuilder: (context, index) {
-  //                     return new _rowGoFoodFeatured(snapshot.data![index]);
-  //                   },
-  //                 );
-  //               }
-  //               return Center(
-  //                 child: SizedBox(
-  //                     width: 40.0,
-  //                     height: 40.0,
-  //                     child: const CircularProgressIndicator()),
-  //               );
-  //             },
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _buildGoFoodFeatured() {
-    return new Container(
+    return Container(
       padding: EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 16.0),
-      child: new Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          new Text(
+          Text(
             "GO-FOOD",
-            style: new TextStyle(fontFamily: "NeoSansBold"),
+            style: TextStyle(fontFamily: "NeoSansBold"),
           ),
-          new Padding(
+          Padding(
             padding: EdgeInsets.only(top: 8.0),
           ),
-          new Text(
+          Text(
             "Pilihan Terlaris",
-            style: new TextStyle(fontFamily: "NeoSansBold"),
+            style: TextStyle(fontFamily: "NeoSansBold"),
           ),
-          new SizedBox(
+          SizedBox(
             height: 172.0,
             child: FutureBuilder<List>(
-                future: fetchFood(),
+                //future: fetchFood,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return new ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      padding: EdgeInsets.only(top: 12.0),
-                      physics: new ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return _rowGoFoodFeatured(snapshot.data![index]);
-                      },
-                    );
-                  }
-                  return Center(
-                    child: SizedBox(
-                        width: 40.0,
-                        height: 40.0,
-                        child: const CircularProgressIndicator()),
-                  );
-                }),
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  padding: EdgeInsets.only(top: 12.0),
+                  physics: ClampingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return _rowGoFoodFeatured(snapshot.data![index]);
+                  },
+                );
+              }
+              return Center(
+                child: SizedBox(
+                    width: 40.0,
+                    height: 40.0,
+                    child: const CircularProgressIndicator()),
+              );
+            }),
           ),
         ],
       ),
@@ -214,44 +194,42 @@ class _BerandaPageState extends State<BerandaPage> {
 
 // start menu bottom sheeet
   Widget _buildMenuBottomSheet() {
-    return new StatefulBuilder(builder: (c, s) {
-      return new SafeArea(
-          child: new Container(
+    return StatefulBuilder(builder: (c, s) {
+      return SafeArea(
+          child: Container(
         padding: EdgeInsets.only(left: 16.0, right: 16.0),
         width: double.infinity,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0), color: Colors.white),
-        child: new Column(
+        child: Column(
           children: <Widget>[
-            new Icon(
+            Icon(
               Icons.drag_handle,
               color: Gojekpalette.grey,
             ),
-            new Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Text(
+                Text(
                   "GO-JEK Services",
-                  style:
-                      new TextStyle(fontFamily: "NeoSansBold", fontSize: 18.0),
+                  style: TextStyle(fontFamily: "NeoSansBold", fontSize: 18.0),
                 ),
-                new OutlinedButton(
+                OutlinedButton(
                   //color: Gojekpalette.green
                   onPressed: () {},
-                  child: new Text(
+                  child: Text(
                     "EDIT FAVORITES",
-                    style: new TextStyle(
-                        fontSize: 12.0, color: Gojekpalette.green),
+                    style: TextStyle(fontSize: 12.0, color: Gojekpalette.green),
                   ),
                 ),
               ],
             ),
-            new Container(
+            Container(
               height: 300.0,
-              child: new GridView.builder(
+              child: GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: _gojekServiceList.length,
-                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (context, position) {
                   return _rowGojekService(_gojekServiceList[position]);
@@ -428,65 +406,62 @@ class _BerandaPageState extends State<BerandaPage> {
   }
 
   Widget _rowGojekService(GojekService gojekService) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () {
-            // showModalBottomSheet<void>(
-            //   context: context,
-            //   builder: (context) {
-            //     return _buildMenuBottomSheet();
-            //   },
-            // );
-            var snackBar =
-                SnackBar(content: Text("${gojekService.title} clicked"));
-            // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          },
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              border: Border.all(color: Gojekpalette.grey200, width: 1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Icon(
-              gojekService.image,
-              color: gojekService.color,
-              size: 32,
+    return new Container(
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              showModalBottomSheet<void>(
+                  context: context,
+                  builder: (context) {
+                    return _buildMenuBottomSheet();
+                  });
+            },
+            child: new Container(
+              decoration: new BoxDecoration(
+                  border: Border.all(color: Gojekpalette.grey200, width: 1.0),
+                  borderRadius:
+                      new BorderRadius.all(new Radius.circular(20.0))),
+              padding: EdgeInsets.all(12.0),
+              child: new Icon(
+                gojekService.image,
+                color: gojekService.color,
+                size: 32.0,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          gojekService.title,
-          style: const TextStyle(fontSize: 10),
-        )
-      ],
+          new Padding(
+            padding: EdgeInsets.only(top: 6.0),
+          ),
+          new Text(gojekService.title, style: new TextStyle(fontSize: 10.0))
+        ],
+      ),
     );
   }
-}
 
-Widget _rowGoFoodFeatured(Food food) {
-  return Container(
-    margin: EdgeInsets.only(right: 16.0),
-    child: Column(
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            food.image,
-            width: 132.0,
-            height: 132.0,
+  Widget _rowGoFoodFeatured(Food food) {
+    return Container(
+      margin: EdgeInsets.only(right: 16.0),
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset(
+              food.image,
+              width: 132.0,
+              height: 132.0,
+            ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 8.0),
-        ),
-        Text(
-          food.title,
-        ),
-      ],
-    ),
-  );
+          Padding(
+            padding: EdgeInsets.only(top: 8.0),
+          ),
+          Text(
+            food.title,
+          ),
+        ],
+      ),
+    );
+  }
 }

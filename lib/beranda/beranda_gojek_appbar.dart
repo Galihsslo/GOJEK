@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 
 class GojekAppBar extends AppBar {
